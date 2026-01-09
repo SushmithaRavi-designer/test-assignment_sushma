@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" style="display: none;">
+  <!-- Reusable SVG Graphics -->
+  
+  <!-- Building Icon 1 -->
+  <g id="building-1">
+    <rect x="20" y="100" width="150" height="200" fill="none" stroke="#333" stroke-width="2"/>
+    <line x1="20" y1="150" x2="170" y2="150" stroke="#333" stroke-width="1"/>
+    <line x1="20" y1="200" x2="170" y2="200" stroke="#333" stroke-width="1"/>
+    <rect x="40" y="120" width="25" height="25" fill="none" stroke="#333" stroke-width="1"/>
+    <rect x="75" y="120" width="25" height="25" fill="none" stroke="#333" stroke-width="1"/>
+    <rect x="110" y="120" width="25" height="25" fill="none" stroke="#333" stroke-width="1"/>
+    <rect x="40" y="160" width="25" height="25" fill="none" stroke="#333" stroke-width="1"/>
+    <rect x="75" y="160" width="25" height="25" fill="none" stroke="#333" stroke-width="1"/>
+    <rect x="110" y="160" width="25" height="25" fill="none" stroke="#333" stroke-width="1"/>
+    <rect x="40" y="210" width="25" height="25" fill="none" stroke="#333" stroke-width="1"/>
+    <rect x="75" y="210" width="25" height="25" fill="none" stroke="#333" stroke-width="1"/>
+    <rect x="110" y="210" width="25" height="25" fill="none" stroke="#333" stroke-width="1"/>
+    <polygon points="20,100 95,40 170,100" fill="none" stroke="#333" stroke-width="2"/>
+  </g>
+
+  <!-- Modern Building -->
+  <g id="building-2">
+    <path d="M 50 200 L 80 150 L 110 200 L 110 300 L 50 300 Z" fill="none" stroke="#1a1a1a" stroke-width="2"/>
+    <circle cx="80" cy="180" r="8" fill="#f5d5a8"/>
+    <circle cx="80" cy="220" r="8" fill="#f5d5a8"/>
+    <circle cx="80" cy="260" r="8" fill="#f5d5a8"/>
+    <rect x="55" y="250" width="50" height="50" fill="none" stroke="#1a1a1a" stroke-width="2"/>
+  </g>
+
+  <!-- Architectural Plan -->
+  <g id="floor-plan">
+    <rect x="30" y="30" width="200" height="180" fill="none" stroke="#333" stroke-width="2"/>
+    <line x1="130" y1="30" x2="130" y2="210" stroke="#333" stroke-width="1.5"/>
+    <line x1="30" y1="110" x2="230" y2="110" stroke="#333" stroke-width="1.5"/>
+    <circle cx="80" cy="70" r="15" fill="none" stroke="#f5d5a8" stroke-width="2"/>
+    <circle cx="180" cy="70" r="15" fill="none" stroke="#f5d5a8" stroke-width="2"/>
+    <rect x="50" y="130" width="60" height="60" fill="none" stroke="#f5d5a8" stroke-width="2"/>
+    <rect x="140" y="130" width="60" height="60" fill="none" stroke="#f5d5a8" stroke-width="2"/>
+  </g>
+
+  <!-- Geometric Pattern -->
+  <g id="pattern-geo">
+    <defs>
+      <pattern id="geo-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+        <rect width="100" height="100" fill="#f0f0f0"/>
+        <polygon points="50,0 100,50 50,100 0,50" fill="none" stroke="#f5d5a8" stroke-width="1"/>
+        <circle cx="50" cy="50" r="20" fill="none" stroke="#1a1a1a" stroke-width="0.5"/>
+      </pattern>
+    </defs>
+  </g>
+
+  <!-- Blueprint Pattern -->
+  <g id="blueprint">
+    <defs>
+      <pattern id="blueprint-pattern" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse">
+        <rect width="50" height="50" fill="#1a3a4a"/>
+        <line x1="0" y1="0" x2="50" y2="50" stroke="#4a9aaf" stroke-width="0.5" opacity="0.5"/>
+        <line x1="50" y1="0" x2="0" y2="50" stroke="#4a9aaf" stroke-width="0.5" opacity="0.5"/>
+      </pattern>
+    </defs>
+  </g>
+
+  <!-- Decorative Lines -->
+  <g id="decorative-lines">
+    <line x1="0" y1="0" x2="100" y2="0" stroke="#f5d5a8" stroke-width="2"/>
+    <line x1="0" y1="5" x2="80" y2="5" stroke="#f5d5a8" stroke-width="1"/>
+    <line x1="0" y1="10" x2="60" y2="10" stroke="#f5d5a8" stroke-width="1"/>
+  </g>
+
+  <!-- Tree Icon -->
+  <g id="tree">
+    <ellipse cx="50" cy="30" rx="25" ry="35" fill="#7cb342"/>
+    <rect x="45" y="60" width="10" height="40" fill="#8b6f47"/>
+  </g>
+
+  <!-- Compass -->
+  <g id="compass">
+    <circle cx="50" cy="50" r="45" fill="none" stroke="#1a1a1a" stroke-width="2"/>
+    <circle cx="50" cy="50" r="35" fill="none" stroke="#f5d5a8" stroke-width="1"/>
+    <polygon points="50,15 65,45 50,50 35,45" fill="#1a1a1a"/>
+    <polygon points="50,85 60,60 50,50 40,60" fill="none" stroke="#1a1a1a" stroke-width="1"/>
+    <polygon points="85,50 60,60 50,50 60,40" fill="none" stroke="#1a1a1a" stroke-width="1"/>
+    <polygon points="15,50 40,40 50,50 40,60" fill="none" stroke="#1a1a1a" stroke-width="1"/>
+  </g>
+</svg>
