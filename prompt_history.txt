@@ -1,0 +1,35 @@
+Prompt history — consolidated
+Created: 2026-01-08
+
+1) User request (initial)
+"Create a visually artistic architect resume in a two‑column layout. The left column should include a portrait placeholder framed by geometric segments with cherry blossom motifs, followed by sections for Name, Place, Contact Info (phone + email icons), Language proficiency bars, and Avocations represented by minimalist icons (sleep, reading, painting, gaming, filmmaking, travel, music, walking, running, martial arts, yoga). The right column should contain a Personal Bio written in poetic, nature‑inspired language, a Technical Aptitude list (AutoCAD, Photoshop, Revit, etc.), a Design Immersion list (clinic design, container house, educational project, etc.), and a Preferred Domain list (interior, product, architectural, landscaping design). Use a soft pastel palette (whites, pinks, muted tones), clean modern typography, and subtle shadows for depth. The overall theme should feel harmonious, nature‑inspired, and professional."
+
+2) User provided reference image
+- Anime-style female architect illustration with cherry blossom background (user-supplied). Face to be softened/blurred.
+
+3) User request (style revision)
+"A stylized architectural resume layout with an anime-style female architect illustration. Use the exact color palette of muted cherry blossom pink (#f4c2c2), soft blush (#f9e6e6), off-white (#ffffff), light grey (#dcdcdc), and deep charcoal (#333333). Background features cherry blossoms in pale pink and white, with mosaic geometric segments in soft grey. Text sections in dark grey (#333333) with accent headers in blush pink (#f4c2c2). Progress bars and icons styled in pastel tones consistent with the cherry blossom theme. The overall aesthetic is serene, professional, and nature-inspired."
+
+4) User request (warm minimal palette)
+"Apply a warm, minimal architectural color palette inspired by the reference image. Use soft ivory #F4F1EC as the primary background with subtle paper-like texture. Introduce warm beige #E2D3C3 and muted blush #E7B9A6 as secondary accents. Use light stone grey #D6D6D6 for dividers and neutral surfaces. Apply deep charcoal #2B2B2B and matte black #1C1C1C for panels, headings, and key contrast areas. All colors should remain desaturated and natural. Maintain a calm, elegant, biophilic, and professional visual tone suitable for an architectural portfolio layout."
+
+5) User workflow requests
+- "Need everything in one single sheet" (convert layout to single printable A4 portrait)
+- Upload portrait image and blur face (user provided an image)
+- "create two columns equally" (convert to two equal columns)
+
+6) File-saving requests
+- "save my prompt in D:\2nd sem\BOOTCAMP\iaac_test\prompt" (done)
+- "prompt_history.txt" (this consolidated file)
+
+7) Actions performed (major)
+- Edited: `2.html` — implemented two-column design, segmented portrait SVG, cherry blossom accents, pastel and warm palettes, face-blur overlay, single-sheet A4 print rules, responsive tweaks, and equal two-column layout as requested.
+- Saved user prompt to `D:\2nd sem\BOOTCAMP\iaac_test\prompt`
+- Created this consolidated `prompt_history.txt` in the same folder.
+
+If you want, I can:
+- Append timestamps for each user request and assistant change, or
+- Export `prompt_history.txt` as `prompt_history.md` with richer formatting, or
+- Save a versioned history file `prompt_history_v1.txt`, `prompt_history_v2.txt` etc.
+
+Saved by GitHub Copilot (Raptor mini (Preview)).
