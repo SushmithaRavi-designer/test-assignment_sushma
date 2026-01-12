@@ -22,7 +22,7 @@ html {
 
 body {
     font-family: 'Flux Architect', 'Arial', sans-serif;
-    background: #f0f0f0;
+    background: #f3f4f6;
     color: #333;
     line-height: 1.6;
 }
@@ -77,7 +77,7 @@ body {
 
 .nav-links a:hover,
 .nav-links a.active {
-    color: #f5d5a8;
+    color: #9aa0a6;
 }
 
 /* Hero Section */
@@ -153,12 +153,12 @@ body {
 }
 
 .cta-button.primary {
-    background: #f5d5a8;
-    color: #1a1a1a;
+    background: #9aa0a6;
+    color: #ffffff;
 }
 
 .cta-button.primary:hover {
-    background: #e8c4a0;
+    background: #c7cccf;
     transform: translateY(-3px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
@@ -208,7 +208,7 @@ body {
     transform: translateX(-50%);
     width: 80px;
     height: 3px;
-    background: linear-gradient(90deg, transparent, #f5d5a8, transparent);
+    background: linear-gradient(90deg, transparent, #9aa0a6, transparent);
 }
 
 .project-grid {
@@ -327,10 +327,10 @@ body {
 /* Skills Section */
 .skills-preview {
     padding: 80px 20px;
-    background: #f0f0f0;
+    background: #f3f4f6;
     background-image: 
         repeating-linear-gradient(90deg, transparent, transparent 50px, rgba(26, 26, 26, 0.02) 50px, rgba(26, 26, 26, 0.02) 100px),
-        repeating-linear-gradient(0deg, transparent, transparent 50px, rgba(245, 213, 168, 0.02) 50px, rgba(245, 213, 168, 0.02) 100px);
+        repeating-linear-gradient(0deg, transparent, transparent 50px, rgba(154,160,166,0.02) 50px, rgba(154,160,166,0.02) 100px);
 }
 
 .skills-preview h2 {
@@ -910,7 +910,7 @@ body {
 }
 
 .social-links a:hover {
-    color: #f5d5a8;
+    color: #9aa0a6;
 }
 
 /* Responsive */
@@ -992,4 +992,31 @@ body {
         padding: 80px 20px;
         min-height: 400px;
     }
+
+/* --- Grey theme overrides --- */
+:root {
+    --accent-1: #9aa0a6; /* primary grey accent */
+    --accent-2: #c7cccf; /* lighter accent */
+    --accent-3: #bdbfc1; /* muted accent */
+    --bg-1: #f3f4f6; /* page background */
+}
+
+/* page background */
+body { background: var(--bg-1); }
+
+/* navigation accent */
+.nav-links a:hover,
+.nav-links a.active { color: var(--accent-1); }
+
+/* CTA adjustments */
+.cta-button.primary { background: var(--accent-1); color: #ffffff; border-color: var(--accent-1); }
+.cta-button.primary:hover { background: var(--accent-2); color: #1a1a1a; }
+
+/* project accents */
+.project-card { border-left-color: var(--accent-1); }
+.featured h2::after, .portfolio-page h1::after { background: linear-gradient(90deg, transparent, var(--accent-1), transparent); }
+.skill-item::before { background: linear-gradient(90deg, var(--accent-1), var(--accent-2)); }
+
+/* footer/social */
+.social-links a:hover { color: var(--accent-1); }
 }
