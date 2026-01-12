@@ -283,6 +283,63 @@
             background: rgba(255,255,255,0.08);
         }
 
+        /* Project card + modal */
+        .project-card {
+            margin-top: 30px;
+            background: #ffffff;
+            padding: 18px;
+            border-radius: 6px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+        }
+        .project-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+        .project-image-wrap {
+            max-width: 100%;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+        .project-image {
+            display: block;
+            width: 100%;
+            height: auto;
+            cursor: pointer;
+            transition: transform .35s ease;
+        }
+        .project-image:hover {
+            transform: scale(1.02);
+        }
+        .project-description {
+            margin-top: 10px;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        /* modal overlay */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.78);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .18s ease;
+        }
+        .modal-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .modal-image {
+            max-width: 90%;
+            max-height: 90%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+            border-radius: 6px;
+        }
+
         /* hide native cursor on hover-capable devices only */
         @media (hover: hover) {
             body { cursor: none; }
@@ -477,6 +534,18 @@
                 </div>
             </div>
 
+            <!-- Agritecture project card -->
+            <div class="project-card" id="agritecture">
+                <div class="project-title">Agritecture — Experimental Agro-Architecture</div>
+                <div class="project-image-wrap">
+                    <!-- Place the attached image at assets/agritecture.jpg -->
+                    <img src="assets/agritecture.jpg" alt="Agritecture project" class="project-image" />
+                </div>
+                <div class="project-description">
+                    An exploratory project integrating agriculture with architectural form — combining landscape, rooftop cultivation, water harvesting, and community spaces into an integrated campus. Click the image to view a larger preview.
+                </div>
+            </div>
+
             <div class="preferred-domain">
                 <div class="immersion-title">PREFERRED DOMAIN</div>
                 <div class="domain-grid">
@@ -599,6 +668,47 @@
     if(cursorEl) cursorEl.style.display = 'none';
     document.body.style.cursor = 'auto';
   }
+})();
+</script>
+<script>
+(function(){
+  // Simple modal for project images
+  const createModal = () => {
+    const overlay = document.createElement('div');
+    overlay.className = 'modal-overlay';
+    overlay.innerHTML = '<img class="modal-image" src="" alt="Project preview">';
+    document.body.appendChild(overlay);
+
+    const img = overlay.querySelector('.modal-image');
+    overlay.addEventListener('click', (e) => {
+      // close when clicking background or image
+      overlay.classList.remove('open');
+    });
+    window.addEventListener('keydown', (e) => {
+      if(e.key === 'Escape') overlay.classList.remove('open');
+    });
+    return {
+      open(src){
+        img.src = src;
+        overlay.classList.add('open');
+      }
+    };
+  };
+  const modal = createModal();
+
+  document.querySelectorAll('.project-image').forEach((el) => {
+    el.addEventListener('click', (e) => {
+      modal.open(el.src);
+    });
+    el.addEventListener('mouseenter', () => {
+      const cursor = document.getElementById('custom-cursor');
+      cursor && cursor.classList.add('hover');
+    });
+    el.addEventListener('mouseleave', () => {
+      const cursor = document.getElementById('custom-cursor');
+      cursor && cursor.classList.remove('hover');
+    });
+  });
 })();
 </script>
 </body>
