@@ -246,9 +246,52 @@
             margin: 20px auto;
             height: 200px;
         }
+
+        /* --- Interactive background canvas & custom cursor --- */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* make sure the main content sits above the canvas */
+        .cv-container { position: relative; z-index: 1; }
+
+        .custom-cursor {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(0,0,0,0.85);
+            background: rgba(255,255,255,0.02);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: transform .12s ease, width .18s ease, height .18s ease, background .18s ease, opacity .18s;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            will-change: transform;
+        }
+
+        .custom-cursor.hover {
+            transform: translate(-50%, -50%) scale(2.2);
+            background: rgba(255,255,255,0.08);
+        }
+
+        /* hide native cursor on hover-capable devices only */
+        @media (hover: hover) {
+            body { cursor: none; }
+        }
     </style>
 </head>
 <body>
+    <canvas id="bg-canvas"></canvas>
+    <div class="custom-cursor" id="custom-cursor"></div>
     <div class="cv-container">
         <!-- Left Column -->
         <div class="left-column">
@@ -488,5 +531,75 @@
             </div>
         </div>
     </div>
+<script src="https://unpkg.com/three@0.152.2/build/three.min.js"></script>
+<script>
+(function(){
+  const canvas = document.getElementById('bg-canvas');
+  if(!canvas) return;
+
+  const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setClearColor(0x000000, 0);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, 0.1, 5000);
+  camera.position.set(0, 0, 800);
+
+  // sphere
+  const sphereGeo = new THREE.SphereGeometry(220, 56, 56);
+  const sphereMat = new THREE.MeshStandardMaterial({ color: 0xd8cbbf, metalness: 0.12, roughness: 0.56 });
+  const sphere = new THREE.Mesh(sphereGeo, sphereMat);
+  scene.add(sphere);
+
+  // lights
+  const light1 = new THREE.DirectionalLight(0xffffff, 0.95);
+  light1.position.set(1, 1, 0.5);
+  scene.add(light1);
+  const light2 = new THREE.AmbientLight(0xffffff, 0.35);
+  scene.add(light2);
+
+  // mouse interaction
+  let mouseX = 0, mouseY = 0, targetX = 0, targetY = 0;
+  document.addEventListener('mousemove', (e) => {
+    mouseX = (e.clientX - window.innerWidth/2);
+    mouseY = (e.clientY - window.innerHeight/2);
+    const cursor = document.getElementById('custom-cursor');
+    if(cursor){ cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px'; }
+  });
+
+  function onWindowResize(){
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  }
+  window.addEventListener('resize', onWindowResize);
+
+  function animate(){
+    requestAnimationFrame(animate);
+    targetX += (mouseX - targetX) * 0.05;
+    targetY += (mouseY - targetY) * 0.05;
+    sphere.rotation.y = targetX * 0.0006 + performance.now() * 0.00008;
+    sphere.rotation.x = targetY * 0.0006;
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  // cursor hover interactions (links, buttons, and highlighted UI blocks)
+  const cursorEl = document.getElementById('custom-cursor');
+  const hoverTargets = document.querySelectorAll('a, button, .profile-image, .section-title');
+  hoverTargets.forEach((el) => {
+    el.addEventListener('mouseenter', () => cursorEl && cursorEl.classList.add('hover'));
+    el.addEventListener('mouseleave', () => cursorEl && cursorEl.classList.remove('hover'));
+  });
+
+  // disable for touch devices (save battery & avoid odd behavior)
+  if(('ontouchstart' in window) || navigator.maxTouchPoints > 0){
+    canvas.style.display = 'none';
+    if(cursorEl) cursorEl.style.display = 'none';
+    document.body.style.cursor = 'auto';
+  }
+})();
+</script>
 </body>
 </html>
