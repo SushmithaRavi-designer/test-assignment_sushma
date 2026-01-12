@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <canvas id="bg-canvas"></canvas>
+    <div class="custom-cursor" id="custom-cursor"></div>
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
@@ -159,5 +161,88 @@
             </div>
         </div>
     </footer>
+
+<script src="https://unpkg.com/three@0.152.2/build/three.min.js"></script>
+<script>
+(function(){
+  const canvas = document.getElementById('bg-canvas');
+  const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setClearColor(0x000000, 0);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, 0.1, 5000);
+  camera.position.set(0, 0, 800);
+
+  const geo = new THREE.SphereGeometry(260, 48, 48);
+  const mat = new THREE.MeshStandardMaterial({ color: 0xd8cbbf, metalness: 0.1, roughness: 0.6 });
+  const mesh = new THREE.Mesh(geo, mat);
+  scene.add(mesh);
+
+  const light1 = new THREE.DirectionalLight(0xffffff, 0.9);
+  light1.position.set(1, 1, 0.5);
+  scene.add(light1);
+  const light2 = new THREE.AmbientLight(0xffffff, 0.35);
+  scene.add(light2);
+
+  let mouseX = 0, mouseY = 0, targetX = 0, targetY = 0;
+  const cursor = document.getElementById('custom-cursor');
+  document.addEventListener('mousemove', (e) => {
+    mouseX = (e.clientX - window.innerWidth/2);
+    mouseY = (e.clientY - window.innerHeight/2);
+    if(cursor){ cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px'; }
+  });
+
+  function onWindowResize(){
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  }
+  window.addEventListener('resize', onWindowResize);
+
+  function animate(){
+    requestAnimationFrame(animate);
+    targetX += (mouseX - targetX) * 0.05;
+    targetY += (mouseY - targetY) * 0.05;
+    mesh.rotation.y = targetX * 0.0006 + performance.now() * 0.00008;
+    mesh.rotation.x = targetY * 0.0006;
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  // cursor hover interactions for links and project previews
+  const hoverTargets = document.querySelectorAll('a, button, .portfolio-item, .project-card');
+  hoverTargets.forEach((el) => {
+    el.addEventListener('mouseenter', () => cursor && cursor.classList.add('hover'));
+    el.addEventListener('mouseleave', () => cursor && cursor.classList.remove('hover'));
+  });
+
+  // disable on touch devices
+  if(('ontouchstart' in window) || navigator.maxTouchPoints > 0){
+    canvas.style.display = 'none';
+    if(cursor) cursor.style.display = 'none';
+    document.body.style.cursor = 'auto';
+  }
+})();
+</script>
+
+<!-- modal helper for embedded images -->
+<script>
+(function(){
+  const overlay = document.createElement('div');
+  overlay.className = 'modal-overlay';
+  overlay.innerHTML = '<img class="modal-image" src="" alt="Preview">';
+  document.body.appendChild(overlay);
+  const img = overlay.querySelector('.modal-image');
+  overlay.addEventListener('click', () => overlay.classList.remove('open'));
+  window.addEventListener('keydown', (e) => { if(e.key === 'Escape') overlay.classList.remove('open'); });
+  document.querySelectorAll('.portfolio-image-embed').forEach(el => {
+    el.addEventListener('click', () => { img.src = el.datasetSrc || el.src || el.getAttribute('data-src'); overlay.classList.add('open'); });
+    el.addEventListener('mouseenter', () => document.getElementById('custom-cursor')?.classList.add('hover'));
+    el.addEventListener('mouseleave', () => document.getElementById('custom-cursor')?.classList.remove('hover'));
+  });
+})();
+</script>
 </body>
 </html>
