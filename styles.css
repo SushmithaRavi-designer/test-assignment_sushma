@@ -227,6 +227,64 @@ body {
     position: relative;
 }
 
+/* Interactive background canvas & custom cursor */
+#bg-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+.custom-cursor {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(0,0,0,0.85);
+    background: rgba(255,255,255,0.02);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform .12s ease, width .18s ease, height .18s ease, background .18s ease, opacity .18s;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference;
+    will-change: transform;
+}
+.custom-cursor.hover {
+    transform: translate(-50%, -50%) scale(2.2);
+    background: rgba(255,255,255,0.08);
+}
+@media (hover: hover) {
+    body { cursor: none; }
+}
+
+/* Modal overlay for project previews */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.78);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .18s ease;
+}
+.modal-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+.modal-image {
+    max-width: 90%;
+    max-height: 90%;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    border-radius: 6px;
+}
+
 .project-card::after {
     content: '';
     position: absolute;
